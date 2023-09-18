@@ -3,11 +3,16 @@ import { View, Image, StyleSheet } from 'react-native';
 
 import logo from './Logo.png';
 
+
+
+
 const Landing = () => {
   return (
     <View style={styles.landingContainer}>
       <Image source={logo} alt="School Logo" style={styles.logo} />
     </View>
+
+
   );
 }
 

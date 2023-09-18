@@ -25,7 +25,6 @@ const RegistroBeneficiario = () => {
       .post('http://localhost:5000/beneficiario', formValues)
       .then((response) => {
         console.log('Beneficiario created:', response.data);
-        // Reset form values
         setFormValues({
           Nombre: '',
           Apellido: '',
