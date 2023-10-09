@@ -1,3 +1,5 @@
+//TODO MAL
+
 import React, { useState } from 'react';
 import {
   View,
@@ -5,15 +7,16 @@ import {
   Pressable,
   StyleSheet,
   TextInput,
-  DatePickerIOS,
 } from 'react-native';
+import DatePicker from 'react-native-datepicker'
 import axios from 'axios';
 
 const RegistroUsuario = () => {
+  const [calendarIcon, setCalendarIcon] = useState("https://images.unsplash.com/photo-1590272456521-1bbe160a18ce?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2llbG8lMjBuZWdyb3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80");
   const [formValues, setFormValues] = useState({
     Nombre: '',
     Apellido: '',
-    FechaDeNacimiento: new Date(),
+    FechaDeNacimiento: '',
     DNI: '',
     Email: '',
     Contraseña: '',
@@ -21,17 +24,17 @@ const RegistroUsuario = () => {
     BuenaSalud: '',
     Embarazo: '',
     Sexo: '',
-    FechaDeDonacion: new Date(),
+    FechaDeDonacion: '',
     Medicamentos: '',
     HepatitisBC: '',
-    Parto: new Date(),
-    Operacion: new Date(),
-    Antitetanica: new Date(),
-    UltimoTatuaje: new Date(),
-    UltimoHierro: new Date(),
+    Parto: '',
+    Operacion: '',
+    Antitetanica: '',
+    UltimoTatuaje: '',
+    UltimoHierro: '',
     LactanciaMaterna: '',
-    FinMononucleosis: new Date(),
-    Antipaludicos: new Date(),
+    FinMononucleosis: '',
+    Antipaludicos: '',
     ITS: '',
     TipoSangre: '',
   });
@@ -103,15 +106,17 @@ const RegistroUsuario = () => {
           onChangeText={(text) => handleInputChange('Apellido', text)}
         />
       </View>
+      
       <View style={styles.formGroup}>
         <Text>Fecha de Nacimiento:</Text>
-        <DatePickerIOS
+        <DatePicker
           date={formValues.FechaDeNacimiento}
           onDateChange={(date) =>
             handleDateChange('FechaDeNacimiento', date)
           }
         />
       </View>
+        
       <View style={styles.formGroup}>
         <Text>DNI:</Text>
         <TextInput
@@ -168,6 +173,7 @@ const RegistroUsuario = () => {
           onChangeText={(text) => handleInputChange('Sexo', text)}
         />
       </View>
+      {/*
       <View style={styles.formGroup}>
         <Text>Fecha de Donación:</Text>
         <DatePickerIOS
@@ -177,6 +183,8 @@ const RegistroUsuario = () => {
           }
         />
       </View>
+        */}
+
       <View style={styles.formGroup}>
         <Text>Medicamentos:</Text>
         <TextInput
@@ -193,6 +201,8 @@ const RegistroUsuario = () => {
           onChangeText={(text) => handleInputChange('HepatitisBC', text)}
         />
       </View>
+
+      {/*
       <View style={styles.formGroup}>
         <Text>Parto:</Text>
         <DatePickerIOS
@@ -200,6 +210,8 @@ const RegistroUsuario = () => {
           onDateChange={(date) => handleDateChange('Parto', date)}
         />
       </View>
+      
+
       <View style={styles.formGroup}>
         <Text>Operación:</Text>
         <DatePickerIOS
@@ -243,6 +255,8 @@ const RegistroUsuario = () => {
           }
         />
       </View>
+        */}
+
       <View style={styles.formGroup}>
         <Text>Lactancia Materna:</Text>
         <TextInput
@@ -251,6 +265,8 @@ const RegistroUsuario = () => {
           onChangeText={(text) => handleInputChange('LactanciaMaterna', text)}
         />
       </View>
+
+      {/*
       <View style={styles.formGroup}>
         <Text>Fin Mononucleosis:</Text>
         <DatePickerIOS
@@ -269,6 +285,7 @@ const RegistroUsuario = () => {
           }
         />
       </View>
+        */}
       <View style={styles.formGroup}>
         <Text>ITS:</Text>
         <TextInput
