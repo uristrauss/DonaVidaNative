@@ -8,6 +8,7 @@ import Tabla from './Tabla';
 import Citas from './Citas';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import RegistroUsuarioDuplicado from './RegistroUsuarioDuplicado';
 import LogOSign from './LogOSign';
 
 
@@ -21,7 +22,8 @@ const App = () => {
       <Stack.Screen name="Landing" component={Landing} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="LogOSign" component={LogOSign}/>
-      <Stack.Screen name="RegistroUsuario" component={RegistroUsuario}/>
+      <Stack.Screen name="RegistroUsuario" component={RegistroUsuarioDuplicado}/>
+      <Stack.Screen name="Tabla" component={Tabla}/>
     </Stack.Navigator>
     </NavigationContainer>
   );

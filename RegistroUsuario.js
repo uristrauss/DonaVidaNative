@@ -1,5 +1,3 @@
-//TODO MAL
-
 import React, { useState } from 'react';
 import {
   View,
@@ -8,7 +6,7 @@ import {
   StyleSheet,
   TextInput,
 } from 'react-native';
-import DatePicker from 'react-native-datepicker'
+import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from 'axios';
 
 const RegistroUsuario = () => {
@@ -39,6 +37,7 @@ const RegistroUsuario = () => {
     TipoSangre: '',
   });
 
+  const [fechaTest, setFechaTest] = useState( new Date())
   const handleInputChange = (name, value) => {
     setFormValues({ ...formValues, [name]: value });
   };
@@ -107,16 +106,21 @@ const RegistroUsuario = () => {
         />
       </View>
       
+    {/*
       <View style={styles.formGroup}>
         <Text>Fecha de Nacimiento:</Text>
-        <DatePicker
-          date={formValues.FechaDeNacimiento}
-          onDateChange={(date) =>
-            handleDateChange('FechaDeNacimiento', date)
+        <DateTimePicker
+          value={formValues.FechaDeNacimiento}
+          mode={'date'}
+          onChange={(value) =>
+          //  handleDateChange('FechaDeNacimiento', date)
+          setFechaTest(fechaTest)
           }
         />
       </View>
+        */}
         
+
       <View style={styles.formGroup}>
         <Text>DNI:</Text>
         <TextInput
@@ -173,7 +177,7 @@ const RegistroUsuario = () => {
           onChangeText={(text) => handleInputChange('Sexo', text)}
         />
       </View>
-      {/*
+      
       <View style={styles.formGroup}>
         <Text>Fecha de Donación:</Text>
         <DatePickerIOS
@@ -183,7 +187,7 @@ const RegistroUsuario = () => {
           }
         />
       </View>
-        */}
+        
 
       <View style={styles.formGroup}>
         <Text>Medicamentos:</Text>
