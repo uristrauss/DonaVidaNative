@@ -17,15 +17,15 @@ const Tabla = () => {
 
   return (
     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-      {!isLoading &&
-        beneficiarios.map((beneficiario) => (
-          <View key={beneficiario.Id} style={{ width: '33%', padding: 10 }}>
-            <View style={{ borderWidth: 1, borderColor: '#ccc', borderRadius: 5 }}>
-              <Image
-                source={{ uri: beneficiario.Imagen }}
-                style={{ width: '100%', height: 200, borderTopLeftRadius: 5, borderTopRightRadius: 5 }}
-              />
-              <View style={{ padding: 10 }}>
+    {!isLoading &&
+      beneficiarios.map((beneficiario) => (
+        <View key={beneficiario.Id} style={{ width: '100%', padding: 10 }}> {/* Adjusted width here */}
+          <View style={{ borderWidth: 1, borderColor: '#ccc', borderRadius: 5 }}>
+            <Image
+              source={{ uri: beneficiario.Imagen }}
+              style={{ width: '100%', height: 200, borderTopLeftRadius: 5, borderTopRightRadius: 5 }}
+            />
+            <View style={{ padding: 10 }}>
                 <Text style={{ fontWeight: 'bold', fontSize: 18 }}>
                   {beneficiario.Nombre} {beneficiario.Apellido}
                 </Text>

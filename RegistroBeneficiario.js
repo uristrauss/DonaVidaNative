@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Picker } from 'react-native';
 import axios from 'axios';
 
 const RegistroBeneficiario = () => {
@@ -16,9 +16,26 @@ const RegistroBeneficiario = () => {
     Imagen: ''
   });
 
+  const [centros, setCentros] = useState([]);
+  const [centroSeleccionado, setCentroSeleccionado] = useState('');
+
   const handleInputChange = (name, value) => {
     setFormValues({ ...formValues, [name]: value });
   };
+
+  const fetchCentros = () => {
+    axios.get('http://localhost:5000/centro')
+      .then(response => {
+        setCentros(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching centers:', error);
+      });
+  };
+
+  useEffect(() => {
+    fetchCentros(); 
+  }, []);
 
   const handleSubmit = () => {
     axios
@@ -112,14 +129,28 @@ const RegistroBeneficiario = () => {
           onChangeText={(value) => handleInputChange('Factor', value)}
         />
       </View>
+
       <View style={styles.formGroup}>
-        <Text>Centro:</Text>
-        <TextInput
-          style={styles.input}
-          value={formValues.fkCentro}
-          onChangeText={(value) => handleInputChange('fkCentro', value)}
-        />
-      </View>
+  <Text>Centro:</Text>
+  <Picker
+  style={styles.input}
+  selectedValue={formValues.fkCentro}
+  onValueChange={(itemValue) => handleInputChange('fkCentro', itemValue)}
+  items={centros}
+>
+  <Picker.Item label="Select a Centro" value="" />
+  {centros.map((centro) => (
+    <Picker.Item
+      key={centro.IdCentroDonacion}
+      label={centro.Nombre}
+      value={centro.IdCentroDonacion}
+    />
+  ))}
+</Picker>
+
+</View>
+
+
       <View style={styles.formGroup}>
         <Text>Imagen:</Text>
         <TextInput
@@ -131,53 +162,56 @@ const RegistroBeneficiario = () => {
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
         <Text style={styles.buttonText}>Crear</Text>
       </TouchableOpacity>
+
+
+      
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    maxWidth: 500,
-    margin: 'auto',
+    flexGrow: 1,
+    backgroundColor: '#F5F5F5',
     padding: 20,
-    backgroundColor: '#990000', // Darker red background color
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.3,
-    shadowOffset: { width: 0, height: 2 },
-    color: '#fff',
   },
   heading: {
     textAlign: 'center',
     marginBottom: 20,
     fontSize: 24,
+    color: '#333',
+    fontWeight: 'bold',
+  },
+  formGroup: {
+    marginBottom: 20,
+  },
+  label: {
+    marginBottom: 6,
+    color: '#333',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  input: {
+    width: '100%',
+    padding: 12,
+    backgroundColor: '#fff',
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+  },
+  button: {
+    width: '100%',
+    padding: 12,
+    backgroundColor: '#cc0000',
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 10,
+  },
+  buttonText: {
     color: '#fff',
- 
-},
-formGroup: {
-  marginBottom: 25,
-},
-input: {
-  width: '100%',
-  padding: 12,
-  backgroundColor: '#d66a6a', // Light red input background color
-  color: '#fff',
-  borderRadius: 5,
-},
-button: {
-  width: '100%',
-  padding: 12,
-  backgroundColor: '#cc0000', // Red button background color
-  borderRadius: 5,
-  alignItems: 'center',
-  justifyContent: 'center',
-  marginTop: 10,
-},
-buttonText: {
-  color: '#fff',
-  fontWeight: 'bold',
-  letterSpacing: 1,
-},
+    fontWeight: 'bold',
+  },
 });
 
 export default RegistroBeneficiario;

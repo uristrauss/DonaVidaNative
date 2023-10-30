@@ -10,6 +10,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import RegistroUsuarioDuplicado from './RegistroUsuarioDuplicado';
 import LogOSign from './LogOSign';
+import Home from './Home';
 
 
 
@@ -18,12 +19,14 @@ const Stack = createNativeStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-    <Stack.Navigator initialRouteName='Home'>
+    <Stack.Navigator initialRouteName='Landing'>
       <Stack.Screen name="Landing" component={Landing} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="LogOSign" component={LogOSign}/>
       <Stack.Screen name="RegistroUsuario" component={RegistroUsuarioDuplicado}/>
       <Stack.Screen name="Tabla" component={Tabla}/>
+      <Stack.Screen name="Home" component={Home}/>
+      <Stack.Screen name="RegistroBeneficiario" component={RegistroBeneficiario}/>
     </Stack.Navigator>
     </NavigationContainer>
   );

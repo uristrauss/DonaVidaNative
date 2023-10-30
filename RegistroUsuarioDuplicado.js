@@ -64,7 +64,7 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
       });
       */
 
-      navigation.navigate('Tabla');
+      navigation.navigate('Home');
   };
 
   return (
