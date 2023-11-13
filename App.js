@@ -9,6 +9,7 @@ import Citas from './Citas';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import RegistroUsuarioDuplicado from './RegistroUsuarioDuplicado';
+import DetalleBeneficiario from './DetalleBeneficiario';
 import LogOSign from './LogOSign';
 import Home from './Home';
 
@@ -27,6 +28,8 @@ const App = () => {
       <Stack.Screen name="Tabla" component={Tabla}/>
       <Stack.Screen name="Home" component={Home}/>
       <Stack.Screen name="RegistroBeneficiario" component={RegistroBeneficiario}/>
+      <Stack.Screen name="DetalleBeneficiario" component={DetalleBeneficiario}/>
+      <Stack.Screen name="Citas" component={Citas}/>
     </Stack.Navigator>
     </NavigationContainer>
   );

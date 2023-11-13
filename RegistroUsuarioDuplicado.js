@@ -14,7 +14,7 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
   const [formValues, setFormValues] = useState({
     Nombre: '',
     Apellido: '',
-    FechaDeNacimiento: null,
+    FechaDeNacimiento: '',
     DNI: '',
     Email: '',
     Contraseña: '',
@@ -22,23 +22,21 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
     BuenaSalud: '',
     Embarazo: '',
     Sexo: '',
-    FechaDeDonacion: null,
+    FechaDeDonacion: '',
     Medicamentos: '',
     HepatitisBC: '',
-    Parto: null,
-    Operacion: null,
-    Antitetanica: null,
-    UltimoTatuaje: null,
-    UltimoHierro: null,
+    Parto: '',
+    Operacion: '',
+    Antitetanica: '',
+    UltimoTatuaje: '',
+    UltimoHierro: '',
     LactanciaMaterna: '',
-    FinMononucleosis: null,
-    Antipaludicos: null,
+    FinMononucleosis: '',
+    Antipaludicos: '',
     ITS: '',
     TipoSangre: '',
   });
 
-  const [showDatePicker, setShowDatePicker] = useState(false);
-  const [selectedDateField, setSelectedDateField] = useState(null);
 
   const handleInputChange = (name, value) => {
     setFormValues({ ...formValues, [name]: value });
@@ -53,7 +51,7 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
 
   //NO SE MANDA NADA
   const handleSubmit = () => {
-    /*
+    
     axios
       .post('http://localhost:5000/donante', formValues)
       .then((response) => {
@@ -62,7 +60,7 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
       .catch((error) => {
         console.error('Error creando usuario:', error);
       });
-      */
+      
 
       navigation.navigate('Home');
   };
@@ -85,7 +83,15 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
         onChangeText={(text) => handleInputChange('Apellido', text)}
       />
 
-      {dateInput('Fecha de Nacimiento')}
+      {/*{dateInput('Fecha de Nacimiento')}*/}
+
+      <Text>Fecha De Nacimiento:</Text>
+      <TextInput
+        style={styles.input}
+        value={formValues.FechaDeNacimiento}
+        onChangeText={(text) => handleInputChange('FechaDeNacimiento', text)}
+      />
+        
 
       <Text>DNI:</Text>
       <TextInput
@@ -130,7 +136,12 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
         onChangeText={(text) => handleInputChange('Sexo', text)}
       />
 
-      {dateInput('FechaDeDonacion')}
+      <Text>Fecha De Última Donación:</Text>
+      <TextInput
+        style={styles.input}
+        value={formValues.FechaDeDonacion}
+        onChangeText={(text) => handleInputChange('FechaDeDonacion', text)}
+      />
 
       <Text>Medicamentos:</Text>
       <TextInput
@@ -146,11 +157,43 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
       />
 
 
-      {dateInput('Parto')}
-      {dateInput('Operacion')}
-      {dateInput('Antitetanica')}
-      {dateInput('UltimoTatuaje')}
-      {dateInput('UltimoHierro')}
+      <Text>Último Parto:</Text>
+      <TextInput
+        style={styles.input}
+        value={formValues.Parto}
+        onChangeText={(text) => handleInputChange('Parto', text)}
+      />
+      
+
+      <Text>Última Operación:</Text>
+      <TextInput
+        style={styles.input}
+        value={formValues.Operacion}
+        onChangeText={(text) => handleInputChange('Operacion', text)}
+      />
+
+      <Text>Última Antitetanica:</Text>
+      <TextInput
+        style={styles.input}
+        value={formValues.Antitetanica}
+        onChangeText={(text) => handleInputChange('Antitetanica', text)}
+      />
+ 
+
+      <Text>Último Tatuaje:</Text>
+      <TextInput
+        style={styles.input}
+        value={formValues.UltimoTatuaje}
+        onChangeText={(text) => handleInputChange('UltimoTatuaje', text)}
+      />
+
+
+      <Text>Último Hierro:</Text>
+      <TextInput
+        style={styles.input}
+        value={formValues.UltimoHierro}
+        onChangeText={(text) => handleInputChange('UltimoHierro', text)}
+      />
 
       <Text>Lactancia Materna:</Text>
       <TextInput
@@ -160,12 +203,20 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
       />
 
 
-      {dateInput('FinMononucleosis')}
-      {dateInput('Antipaludicos')}
+      <Text>Fin Mononucleosis:</Text>
+      <TextInput
+        style={styles.input}
+        value={formValues.FinMononucleosis}
+        onChangeText={(text) => handleInputChange('FinMononucleosis', text)}
+      />
+      
+      <Text>Antipaludicos:</Text>
+      <TextInput
+        style={styles.input}
+        value={formValues.Antipaludicos}
+        onChangeText={(text) => handleInputChange('Antipaludicos', text)}
+      />
 
-     
-      
-      
       <Text>ITS:</Text>
       <TextInput
         style={styles.input}
@@ -183,31 +234,6 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
     </ScrollView>
   );
 
-  function dateInput(label) {
-    return (
-      <View style={styles.formGroup}>
-        <Text>{label}:</Text>
-        <Button title="Select Date" onPress={() => showDatePickerForField(label)} />
-        {showDatePicker && selectedDateField === label && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={formValues[label] || new Date()}
-            mode="date"
-            is24Hour={true}
-            display="default"
-            onChange={(event, selectedDate) => {
-              handleDateChange(label, selectedDate);
-            }}
-          />
-        )}
-      </View>
-    );
-  }
-
-  function showDatePickerForField(fieldName) {
-    setSelectedDateField(fieldName);
-    setShowDatePicker(true);
-  }
 };
 
 const styles = StyleSheet.create({

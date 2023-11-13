@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Picker } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Picker, Image } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 import axios from 'axios';
 
 const RegistroBeneficiario = () => {
@@ -136,9 +137,8 @@ const RegistroBeneficiario = () => {
   style={styles.input}
   selectedValue={formValues.fkCentro}
   onValueChange={(itemValue) => handleInputChange('fkCentro', itemValue)}
-  items={centros}
 >
-  <Picker.Item label="Select a Centro" value="" />
+  <Picker.Item label="Elegí un Centro" value="" />
   {centros.map((centro) => (
     <Picker.Item
       key={centro.IdCentroDonacion}
@@ -148,7 +148,13 @@ const RegistroBeneficiario = () => {
   ))}
 </Picker>
 
+
+
 </View>
+
+
+
+
 
 
       <View style={styles.formGroup}>
