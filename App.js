@@ -12,6 +12,7 @@ import RegistroUsuarioDuplicado from './RegistroUsuarioDuplicado';
 import DetalleBeneficiario from './DetalleBeneficiario';
 import LogOSign from './LogOSign';
 import Home from './Home';
+import Difusion from './Difusion';
 
 
 
@@ -30,6 +31,7 @@ const App = () => {
       <Stack.Screen name="RegistroBeneficiario" component={RegistroBeneficiario}/>
       <Stack.Screen name="DetalleBeneficiario" component={DetalleBeneficiario}/>
       <Stack.Screen name="Citas" component={Citas}/>
+      <Stack.Screen name="Difusion" component={Difusion}/>
     </Stack.Navigator>
     </NavigationContainer>
   );

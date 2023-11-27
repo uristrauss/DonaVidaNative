@@ -26,7 +26,8 @@
     "react-native-screens": "^3.25.0",
     "react-native-swiper": "^1.6.0",
     "react-native-ui-xg": "^0.0.6",
-    "react-native-web": "^0.19.8"
+    "react-native-web": "^0.19.8",
+    "@expo/webpack-config": "^19.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

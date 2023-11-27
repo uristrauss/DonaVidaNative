@@ -6,6 +6,7 @@ import {
   Button,
   StyleSheet,
   ScrollView,
+  TouchableOpacity
 } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import axios from 'axios';
@@ -37,6 +38,7 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
     TipoSangre: '',
   });
 
+  const [currentStep, setCurrentStep] = useState(1);
 
   const handleInputChange = (name, value) => {
     setFormValues({ ...formValues, [name]: value });
@@ -49,7 +51,6 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
   };
 
 
-  //NO SE MANDA NADA
   const handleSubmit = () => {
     
     axios
@@ -65,71 +66,76 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
       navigation.navigate('Home');
   };
 
-  return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.title}>Crear Usuario</Text>
 
-      <Text>Nombre:</Text>
-      <TextInput
-        style={styles.input}
-        value={formValues.Nombre}
-        onChangeText={(text) => handleInputChange('Nombre', text)}
-      />
+  const renderInputsForStep = (step) => {
+    switch (step) {
+      case 1:
+        return (
+          <View>
+            
 
-      <Text>Apellido:</Text>
-      <TextInput
-        style={styles.input}
-        value={formValues.Apellido}
-        onChangeText={(text) => handleInputChange('Apellido', text)}
-      />
+<Text>Nombre:</Text>
+<TextInput
+  style={styles.input}
+  value={formValues.Nombre}
+  onChangeText={(text) => handleInputChange('Nombre', text)}
+/>
 
-      {/*{dateInput('Fecha de Nacimiento')}*/}
+<Text>Apellido:</Text>
+<TextInput
+  style={styles.input}
+  value={formValues.Apellido}
+  onChangeText={(text) => handleInputChange('Apellido', text)}
+/>
 
-      <Text>Fecha De Nacimiento:</Text>
-      <TextInput
-        style={styles.input}
-        value={formValues.FechaDeNacimiento}
-        onChangeText={(text) => handleInputChange('FechaDeNacimiento', text)}
-      />
-        
+{/*{dateInput('Fecha de Nacimiento')}*/}
 
-      <Text>DNI:</Text>
-      <TextInput
-        style={styles.input}
-        value={formValues.DNI}
-        onChangeText={(text) => handleInputChange('DNI', text)}
-      />
-      <Text>Email:</Text>
-      <TextInput
-        style={styles.input}
-        value={formValues.Email}
-        onChangeText={(text) => handleInputChange('Email', text)}
-      />
-      <Text>Contraseña:</Text>
-      <TextInput
-        style={styles.input}
-        value={formValues.Contraseña}
-        onChangeText={(text) => handleInputChange('Contraseña', text)}
-      />
-      <Text>Peso:</Text>
-      <TextInput
-        style={styles.input}
-        value={formValues.Peso}
-        onChangeText={(text) => handleInputChange('Peso', text)}
-      />
-      <Text>Buena Salud:</Text>
-      <TextInput
-        style={styles.input}
-        value={formValues.BuenaSalud}
-        onChangeText={(text) => handleInputChange('BuenaSalud', text)}
-      />
-      <Text>Embarazo:</Text>
-      <TextInput
-        style={styles.input}
-        value={formValues.Embarazo}
-        onChangeText={(text) => handleInputChange('Embarazo', text)}
-      />
-      <Text>Sexo:</Text>
+<Text>Fecha De Nacimiento:</Text>
+<TextInput
+  style={styles.input}
+  value={formValues.FechaDeNacimiento}
+  onChangeText={(text) => handleInputChange('FechaDeNacimiento', text)}
+/>
+  
+
+<Text>DNI:</Text>
+<TextInput
+  style={styles.input}
+  value={formValues.DNI}
+  onChangeText={(text) => handleInputChange('DNI', text)}
+/>
+<Text>Email:</Text>
+<TextInput
+  style={styles.input}
+  value={formValues.Email}
+  onChangeText={(text) => handleInputChange('Email', text)}
+/>
+<Text>Contraseña:</Text>
+<TextInput
+  style={styles.input}
+  value={formValues.Contraseña}
+  onChangeText={(text) => handleInputChange('Contraseña', text)}
+/>
+<Text>Peso:</Text>
+<TextInput
+  style={styles.input}
+  value={formValues.Peso}
+  onChangeText={(text) => handleInputChange('Peso', text)}
+/>
+<Text>Buena Salud:</Text>
+<TextInput
+  style={styles.input}
+  value={formValues.BuenaSalud}
+  onChangeText={(text) => handleInputChange('BuenaSalud', text)}
+/>
+<Text>Embarazo:</Text>
+<TextInput
+  style={styles.input}
+  value={formValues.Embarazo}
+  onChangeText={(text) => handleInputChange('Embarazo', text)}
+/>
+
+<Text>Sexo:</Text>
       <TextInput
         style={styles.input}
         value={formValues.Sexo}
@@ -142,6 +148,13 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
         value={formValues.FechaDeDonacion}
         onChangeText={(text) => handleInputChange('FechaDeDonacion', text)}
       />
+          </View>
+        );
+      case 2:
+        return (
+          <View>
+            
+
 
       <Text>Medicamentos:</Text>
       <TextInput
@@ -230,8 +243,37 @@ const RegistroUsuarioDuplicado = ({navigation}) => {
         onChangeText={(text) => handleInputChange('TipoSangre', text)}
       />
 
-      <Button title="Crear" onPress={handleSubmit} />
-    </ScrollView>
+          </View>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const handleContinue = () => {
+    setCurrentStep(currentStep + 1);
+  };
+
+
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+    <Text style={styles.title}>Registro Usuario {currentStep}</Text>
+
+    {renderInputsForStep(currentStep)}
+
+    {currentStep === 1 && (
+      <TouchableOpacity style={styles.button} onPress={handleContinue}>
+      <Text style={styles.buttonText}>Continuar</Text>
+    </TouchableOpacity>
+    )}
+
+    {currentStep === 2 && (
+      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+      <Text style={styles.buttonText}>REGISTRAR</Text>
+    </TouchableOpacity>
+    )}
+  </ScrollView>
   );
 
 };
@@ -241,9 +283,24 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     marginBottom: 16,
     textAlign: 'center',
+    color: '#FFFFFF', // Text color
+    fontFamily: 'Times New Roman', // Times New Roman font
+    backgroundColor: '#ff89a2', // Pink background
+    paddingVertical: 10, // Vertical padding
+    paddingHorizontal: 20, // Horizontal padding
+    textTransform: 'uppercase', // Convert text to uppercase
+    letterSpacing: 2, // Increase letter spacing
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 3, // For Android shadow
   },
   input: {
     height: 40,
@@ -254,6 +311,18 @@ const styles = StyleSheet.create({
   },
   formGroup: {
     marginBottom: 16,
+  },
+  button: {
+    backgroundColor: '#ff89a2',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
