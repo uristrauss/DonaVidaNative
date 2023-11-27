@@ -62,29 +62,30 @@ const Card = ({
   historia,
   cantDonacionesNecesitadas,
   grupoFactor,
-  onPressCitas, // Receive onPressCitas as a prop
+  onPressCitas,
 }) => (
   <View style={styles.card}>
     <Image source={{ uri: imageUri }} style={styles.roundedImage} />
     <View style={styles.cardContent}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.text}>{historia}</Text>
-      <Text style={styles.text}>
-        <Text style={{ fontWeight: 'bold' }}>CantDonacionesNecesitadas:</Text>{' '}
+      <Text style={styles.cardTitle}>{title}</Text>
+      <Text style={styles.cardText}>{historia}</Text>
+      <Text style={styles.cardText}>
+        <Text style={styles.boldText}>Donaciones Necesarias:</Text>{' '}
         {cantDonacionesNecesitadas}
       </Text>
-      <Text style={styles.text}>
-        <Text style={{ fontWeight: 'bold' }}>Grupo y Factor:</Text> {grupoFactor}
+      <Text style={styles.cardText}>
+        <Text style={styles.boldText}>Grupo y Factor:</Text> {grupoFactor}
       </Text>
     </View>
 
-    <TouchableOpacity style={styles.button} onPress={onPressCitas}>
-      <Text style={styles.buttonText}>Agendar Cita</Text>
+    <TouchableOpacity style={styles.cardButton} onPress={onPressCitas}>
+      <Text style={styles.cardButtonText}>Agendar Cita</Text>
     </TouchableOpacity>
   </View>
 );
 
 const styles = StyleSheet.create({
+  // ... other styles remain unchanged
   container: {
     flex: 1,
     padding: 16,
@@ -121,6 +122,45 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  card: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    overflow: 'hidden',
+    marginBottom: 16,
+  },
+  roundedImage: {
+    width: '100%',
+    height: 200,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  cardContent: {
+    padding: 16,
+  },
+  cardTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center', // Center the title
+  },
+  cardText: {
+    marginBottom: 8,
+  },
+  boldText: {
+    fontWeight: 'bold',
+  },
+  cardButton: {
+    backgroundColor: '#ff89a2',
+    padding: 12,
+    borderRadius: 5,
+    marginTop: 16,
+    alignItems: 'center',
+  },
+  cardButtonText: {
     color: 'white',
     fontSize: 16,
   },

@@ -1,8 +1,9 @@
+// Tabla.js
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Picker, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const Tabla = ({navigate}) => {
+const Tabla = ({ navigate }) => {
   const navigation = useNavigation();
   const [beneficiarios, setBeneficiarios] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,83 +24,115 @@ const Tabla = ({navigate}) => {
 
   return (
     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>Beneficiarios</Text>
+      </View>
       {!isLoading &&
         beneficiarios.map((beneficiario) => (
-          <View key={beneficiario.Id} style={{ width: '100%', padding: 10 }}>
-            <View style={{ borderWidth: 1, borderColor: '#ccc', borderRadius: 5 }}>
-              <Image
-                source={{ uri: beneficiario.Imagen }}
-                style={{ width: '100%', height: 200, borderTopLeftRadius: 5, borderTopRightRadius: 5 }}
-              />
-              <View style={{ padding: 10 }}>
-                <Text style={{ fontWeight: 'bold', fontSize: 18 }}>
-                  {beneficiario.Nombre} {beneficiario.Apellido}
-                </Text>
-                <Text>
-                  <Text style={{ fontWeight: 'bold' }}>CantDonacionesNecesitadas:</Text>{' '}
-                  {beneficiario.CantDonacionesNecesitadas}
-                </Text>
-                <Text>
-                  <Text style={{ fontWeight: 'bold' }}>Compatibilidad:</Text> {beneficiario.Compatibilidad}
-                </Text>
-                <Text>
-                  <Text style={{ fontWeight: 'bold' }}>fkCentro:</Text> {beneficiario.fkCentro}
-                </Text>
-
-                <TouchableOpacity style={styles.button} onPress={() => handleDetallePress(beneficiario.Id)}>
-                  <Text style={styles.buttonText}>Detalle</Text>
-                </TouchableOpacity>
-                
-              </View>
+          <View key={beneficiario.Id} style={styles.cardContainer}>
+            <Image
+              source={{ uri: beneficiario.Imagen }}
+              style={styles.beneficiaryImage}
+            />
+            <View style={styles.beneficiaryInfoContainer}>
+              <Text style={styles.beneficiaryName}>
+                {beneficiario.Nombre} {beneficiario.Apellido}
+              </Text>
+              <Text style={styles.beneficiaryDetails}>
+                <Text style={{ fontWeight: 'bold' }}>Donaciones Necesarias:</Text>{' '}
+                {beneficiario.CantDonacionesNecesitadas}
+              </Text>
+              <Text style={styles.beneficiaryDetails}>
+                <Text style={{ fontWeight: 'bold' }}>Compatibilidad:</Text> {beneficiario.Compatibilidad}
+              </Text>
+              <Text style={styles.beneficiaryDetails}>
+                <Text style={{ fontWeight: 'bold' }}>fkCentro:</Text> {beneficiario.fkCentro}
+              </Text>
+      
+              <TouchableOpacity style={styles.button} onPress={() => handleDetallePress(beneficiario.Id)}>
+                <Text style={styles.buttonText}>Detalle</Text>
+              </TouchableOpacity>
             </View>
           </View>
         ))}
     </View>
   );
+  
+  
+  
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: '#F5F5F5',
-    padding: 20,
+  titleContainer: {
+    width: '100%', // Set to 100% to take the full width
+    alignItems: 'center', // Center the title
+    marginBottom: 16,
   },
-  heading: {
+  title: {
+    fontSize: 28,
     textAlign: 'center',
-    marginBottom: 20,
-    fontSize: 24,
-    color: '#333',
-    fontWeight: 'bold',
+    color: '#FFFFFF',
+    fontFamily: 'Times New Roman',
+    backgroundColor: '#ff89a2',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    textTransform: 'uppercase',
+    letterSpacing: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 3,
   },
-  formGroup: {
-    marginBottom: 20,
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 16,
+    paddingHorizontal: 8,
   },
-  label: {
-    marginBottom: 6,
-    color: '#333',
+  button: {
+    backgroundColor: '#ff89a2',
+    padding: 10,
+    borderRadius: 5,
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
   },
-  input: {
-    width: '100%',
-    padding: 12,
-    backgroundColor: '#fff',
+  cardContainer: {
+    width: '45%', // Adjust the width as needed
+    margin: 10,
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    borderColor: '#ddd',
+    borderRadius: 10,
+    overflow: 'hidden',
+    elevation: 2,
+    backgroundColor: '#fff',
   },
-  button: {
+  beneficiaryImage: {
     width: '100%',
-    padding: 12,
-    backgroundColor: '#cc0000',
-    borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
+    height: 200,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    marginBottom: 10,
   },
-  buttonText: {
-    color: '#fff',
+  beneficiaryInfoContainer: {
+    padding: 15,
+  },
+  beneficiaryName: {
+    fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  beneficiaryDetails: {
+    marginBottom: 5,
   },
 });
 

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, Image } from 'react-native';
 import axios from 'axios';
+import logo from './Logo.png';
 
-const Citas = ({ route }) => {
+const Citas = ({ route, navigation }) => {
   const [valor, setValor] = useState({
     FkDonante: route.params.donanteId,
     FkCentro: route.params.fkCentro,
@@ -50,37 +51,48 @@ const Citas = ({ route }) => {
           FechaDonacion: '',
           YaDono: false,
         });
+        navigation.navigate('Home');
       })
       .catch((error) => {
         console.error('Error creando la donación:', error);
+        navigation.navigate('Home');
       });
   };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      {beneficiarioData && (
-        <View style={styles.dataContainer}>
-          <Text style={styles.dataText}>Beneficiario: {beneficiarioData.Nombre} {beneficiarioData.Apellido}</Text>
-        </View>
-      )}
+      <Text style={styles.cardTitle}>Sacar turno</Text>
 
-      {centroData && (
-        <View style={styles.dataContainer}>
-          <Text style={styles.dataText}>Centro Donacion: {centroData.Nombre}</Text>
-        </View>
-      )}
+      <View style={styles.logoContainer}>
+        <Image source={logo} alt="School Logo" style={styles.logo} />
+      </View>
 
-      <Text style={styles.title}>FechaDonacion</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter FechaDonacion"
-        value={valor.FechaDonacion}
-        onChangeText={(text) => handleInputChange('FechaDonacion', text)}
-      />
+      <View style={styles.card}>
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Submit</Text>
-      </TouchableOpacity>
+        {beneficiarioData && (
+          <View style={styles.dataContainer}>
+            <Text style={styles.dataText}>Beneficiario: {beneficiarioData.Nombre} {beneficiarioData.Apellido}</Text>
+          </View>
+        )}
+
+        {centroData && (
+          <View style={styles.dataContainer}>
+            <Text style={styles.dataText}>Centro Donacion: {centroData.Nombre}</Text>
+          </View>
+        )}
+
+        <Text style={styles.title}>FechaDonacion</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Enter FechaDonacion"
+          value={valor.FechaDonacion}
+          onChangeText={(text) => handleInputChange('FechaDonacion', text)}
+        />
+
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>SUBMIT</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
   );
 };
@@ -91,6 +103,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
+  },
+  card: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    overflow: 'hidden',
+    marginBottom: 16,
+    padding: 16,
+    width: '100%',
+  },
+  cardTitle: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 16,
+    textAlign: 'center',
+    color: '#FFFFFF',
+    fontFamily: 'Times New Roman',
+    backgroundColor: '#ff89a2',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    textTransform: 'uppercase',
+    letterSpacing: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 3,
   },
   dataContainer: {
     marginBottom: 20,
@@ -115,13 +157,22 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   button: {
-    backgroundColor: 'red',
-    padding: 10,
+    backgroundColor: '#ff89a2',
+    padding: 12,
     borderRadius: 5,
-    marginTop: 10,
+    marginTop: 16,
+    alignItems: 'center',
   },
   buttonText: {
     color: 'white',
+  },
+  logo: {
+    width: 150,
+    height: 150,
+    borderRadius: 10,
+  },
+  logoContainer: {
+    marginBottom: 40,
   },
 });
 

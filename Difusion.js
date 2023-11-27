@@ -40,7 +40,7 @@ const Difusion = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Crear Difusión</Text>
+      <Text style={styles.title}>Crear Difusión</Text>
       <View style={styles.formGroup}>
         <Text>Nombre y Apellido:</Text>
         <TextInput
@@ -83,45 +83,48 @@ const Difusion = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    backgroundColor: '#F5F5F5',
-    padding: 20,
+    padding: 16,
   },
-  heading: {
+  title: {
+    fontSize: 28,
+    marginBottom: 16,
     textAlign: 'center',
-    marginBottom: 20,
-    fontSize: 24,
-    color: '#333',
-    fontWeight: 'bold',
-  },
-  formGroup: {
-    marginBottom: 20,
-  },
-  label: {
-    marginBottom: 6,
-    color: '#333',
-    fontSize: 16,
-    fontWeight: 'bold',
+    color: '#FFFFFF',
+    fontFamily: 'Times New Roman',
+    backgroundColor: '#ff89a2',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    textTransform: 'uppercase',
+    letterSpacing: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 3,
   },
   input: {
-    width: '100%',
-    padding: 12,
-    backgroundColor: '#fff',
+    height: 40,
+    borderColor: 'gray',
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    marginBottom: 16,
+    paddingHorizontal: 8,
+  },
+  formGroup: {
+    marginBottom: 16,
   },
   button: {
-    width: '100%',
-    padding: 12,
-    backgroundColor: '#cc0000',
+    backgroundColor: '#ff89a2',
+    padding: 10,
     borderRadius: 5,
+    marginTop: 20,
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 10,
   },
   buttonText: {
-    color: '#fff',
+    color: '#FFFFFF',
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });
